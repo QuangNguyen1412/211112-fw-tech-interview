@@ -39,14 +39,14 @@ void print_bits(void const * const ptr, size_t const size) {
  * @param result - binary value to store the result
  * @return STATUS_CODE - STATUS_SUCCESS if request okay, STATUS_ERROR if out of bounds request
  */
-// TODO: define get_bit function
 STATUS_CODE get_bit(const void* data, const size_t byte_length, const unsigned bit_offset, bool* result)
 {
   int bitLength = byte_length * sizeof(uint8_t) * BITS_IN_A_BYTE;
   uint8_t* bytes = (uint8_t*) data;
   uint8_t byte = 0;
-  if (bit_offset >= bitLength)
+  if (bit_offset >= bitLength) {
     return STATUS_ERROR;
+  }
   byte = bytes[bit_offset / BITS_IN_A_BYTE];
   *result = (byte >> (bit_offset % BITS_IN_A_BYTE)) & 0x1;
   return STATUS_SUCCESS;
@@ -61,14 +61,14 @@ STATUS_CODE get_bit(const void* data, const size_t byte_length, const unsigned b
  * @param bit_offset - the offset of the bit to set (0 is lsb)
  * @return STATUS_CODE - STATUS_SUCCESS if request okay, STATUS_ERROR if out of bounds request
  */
-// TODO: define set_bit function
 STATUS_CODE set_bit(void* data, const size_t byte_length, const unsigned bit_offset)
 {
   uint8_t* bytes = (uint8_t*) data;
   int bitLength = byte_length * sizeof(uint8_t) * BITS_IN_A_BYTE;
   uint8_t* bytePtr = 0;
-  if (bit_offset >= bitLength)
+  if (bit_offset >= bitLength) {
     return STATUS_ERROR;
+  }
   bytePtr = &bytes[bit_offset / BITS_IN_A_BYTE];
   *bytePtr |= (1 << (bit_offset % BITS_IN_A_BYTE));
   return STATUS_SUCCESS;
@@ -83,14 +83,14 @@ STATUS_CODE set_bit(void* data, const size_t byte_length, const unsigned bit_off
  * @param bit_offset - the offset of the bit to clear (0 is lsb)
  * @return STATUS_CODE - STATUS_SUCCESS if request okay, STATUS_ERROR if out of bounds request
  */
-// TODO: define clear_bit function
 STATUS_CODE clear_bit(void* data, const size_t byte_length, const unsigned bit_offset)
 {
   uint8_t* bytes = (uint8_t*) data;
   int bitLength = byte_length * sizeof(uint8_t) * BITS_IN_A_BYTE;
   uint8_t* bytePtr = 0;
-  if (bit_offset >= bitLength)
+  if (bit_offset >= bitLength) {
     return STATUS_ERROR;
+  }
   bytePtr = &bytes[bit_offset / BITS_IN_A_BYTE];
   *bytePtr &= ~(1 << (bit_offset % BITS_IN_A_BYTE));
   return STATUS_SUCCESS;
